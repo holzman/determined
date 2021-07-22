@@ -1,0 +1,5 @@
+- docs for pytorchtrial changes
+- docs for mmdetection
+- test pretrained weights
+- test convergence
+- model export and deploy

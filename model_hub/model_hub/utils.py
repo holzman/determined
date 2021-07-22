@@ -1,6 +1,10 @@
+import logging
+import os
+import urllib.parse
 from typing import List, Union
 
 import numpy as np
+import requests
 import torch
 
 
@@ -45,3 +49,20 @@ def numpify(x: Union[List, np.ndarray, torch.Tensor]) -> np.ndarray:
     if isinstance(x, torch.Tensor):
         return x.cpu().numpy()
     raise TypeError("Expected input of type List, np.ndarray, or torch.Tensor.")
+
+
+def download_url(download_directory: str, url: str) -> str:
+    url_path = urllib.parse.urlparse(url).path
+    basename = url_path.rsplit("/", 1)[1]
+
+    os.makedirs(download_directory, exist_ok=True)
+    filepath = os.path.join(download_directory, basename)
+    if not os.path.exists(filepath):
+        logging.info("Downloading {} to {}".format(url, filepath))
+
+        r = requests.get(url, stream=True)
+        with open(filepath, "wb") as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+    return filepath

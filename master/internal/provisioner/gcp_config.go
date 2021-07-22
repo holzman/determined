@@ -279,6 +279,7 @@ func getCPUPlatform(machineType string) string {
 var gceCPUPlatforms = map[string]string{
 	"a2-highgpu": "Intel Cascade Lake",
 	"a2-megagpu": "Intel Cascade Lake",
+	"n1-highmem": "Intel Skylake",
 }
 
 type gceInstanceType struct {
