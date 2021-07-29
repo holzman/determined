@@ -48,6 +48,10 @@ data:
 
     {{- if .Values.tlsSecret }}
     security:
+      {{- if .Values.defaultTaskUid }}
+      default_task:
+        uid: {{ int .Values.defaultTaskUid }}
+      {{- end }}
       tls:
         cert: {{ include "determined.secretPath" . }}tls.crt
         key: {{ include "determined.secretPath" . }}tls.key

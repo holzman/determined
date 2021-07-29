@@ -19,6 +19,10 @@ masterPort: 8080
 # load-balancer.
 useNodePortForMaster: false
 
+# defaultTaskUid sets the UID that tasks run as. This is useful to set in OKD/OpenShift
+# deployments that do not normally allow running as UID 0.
+# defaultTaskUid: 1000
+
 # tlsSecret enables TLS encryption for all communication made to the Determined master (TLS
 # termination is performed in the Determined master). This includes communication between the
 # Determined master and the task containers it launches, but does not include communication between
